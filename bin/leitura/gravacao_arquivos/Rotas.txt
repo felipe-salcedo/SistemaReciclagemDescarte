@@ -1,0 +1,10 @@
+Ponto A, Ponto B, 3
+Ponto B, Ponto C, 2
+Ponto C, Ponto D, 4
+Ponto D, Ponto E, 6
+Ponto E, Ponto F, 5
+Ponto F, Ponto G, 3
+Ponto A, Ponto H, 7
+Ponto H, Ponto I, 2
+Ponto I, Ponto J, 4
+Ponto J, Ponto A, 8
