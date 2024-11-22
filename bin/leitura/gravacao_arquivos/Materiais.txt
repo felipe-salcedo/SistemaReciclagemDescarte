@@ -1,10 +1,10 @@
-Plástico, Reutilizável, Ponto A
-Papel, Reciclável, Ponto B
-Vidro, Reciclável, Ponto C
-Metal, Reutilizável, Ponto D
-Madeira, Reciclável, Ponto E
-Alumínio, Reciclável, Ponto F
-Tetra Pak, Reciclável, Ponto G
-Papelão, Reciclável, Ponto H
-Plástico, Reciclável, Ponto I
-Vidro, Reutilizável, Ponto J
+Plastico, Descartavel, Ponto A
+Papel, Reciclavel, Ponto B
+Vidro, Reciclavel, Ponto C
+Metal, Descartavel, Ponto D
+Madeira, Reciclavel, Ponto E
+Aluminio, Reciclavel, Ponto F
+Tetra Pak, Reciclavel, Ponto G
+Papelao, Reciclavel, Ponto H
+Plastico, Reciclavel, Ponto I
+Vidro, Descartavel, Ponto J

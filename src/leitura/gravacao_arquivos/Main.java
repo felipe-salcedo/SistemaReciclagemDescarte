@@ -1,28 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package leitura.gravacao_arquivos;
 
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import javax.swing.*;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-/**
- *
- * @author bruno
- */
-public class LeituraGravacao_Arquivos {
-
-    /**
-     * @param args the command line arguments
-     */
+public class Main {
     public static void main(String[] args) throws IOException {
         int op = 0;
         File arquivoMateriais = null;
@@ -35,11 +18,14 @@ public class LeituraGravacao_Arquivos {
                             "1 - Selecionar arquivo Materiais.txt\n" +
                             "2 - Selecionar arquivo Rotas.txt\n" +
                             "3 - Validar e processar arquivos\n" +
-                            "4 - Sair"));
+                            "4 - Carregar materiais na Trie e interagir\n" +
+                /*A fazer */"5 - Carregar rotas no Grafo e interagir\n" +
+                /*A fazer */"6 - Gerar relatorios\n" +
+                            "7 - Sair"));
             switch (op) {
                 case 1:
                     arquivoMateriais = selecionarArquivo("Selecione o arquivo Materiais.txt");
-
+                    break;
                 case 2:
                     arquivoRotas = selecionarArquivo("Selecione o arquivo Rotas.txt");
                     break;
@@ -60,12 +46,19 @@ public class LeituraGravacao_Arquivos {
                     }
                     break;
                 case 4:
+                    ArvoresTries.iniciarInteracaoComTrie(arquivoMateriais);
+                    break;
+
+                case 5:
+                ArvoresTries.iniciarInteracaoComTrie(arquivoMateriais);
+                break;
+                case 7:
                     JOptionPane.showMessageDialog(null, "Saindo do sistema...");
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Opção inválida!");
             }
-        } while (op != 4);
+        } while (op != 5);
     }
 
     private static File selecionarArquivo(String titulo) {
@@ -81,5 +74,4 @@ public class LeituraGravacao_Arquivos {
             return null;
         }
     }
-
 }
