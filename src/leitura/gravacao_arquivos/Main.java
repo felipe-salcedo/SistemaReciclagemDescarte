@@ -1,8 +1,7 @@
 package leitura.gravacao_arquivos;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 public class Main {
@@ -12,6 +11,9 @@ public class Main {
         File arquivoRotas = null;
         DataValidator dataValidator = new DataValidator();
 
+        // Inicializar o grafo sem carregar rotas inicialmente
+        Grafo grafo = new Grafo();
+
         do {
             op = Integer.parseInt(JOptionPane.showInputDialog(
                     "Sistema de Cooperativa de Reciclagem\n" +
@@ -19,8 +21,8 @@ public class Main {
                             "2 - Selecionar arquivo Rotas.txt\n" +
                             "3 - Validar e processar arquivos\n" +
                             "4 - Carregar materiais na Trie e interagir\n" +
-                /*A fazer */"5 - Carregar rotas no Grafo e interagir\n" +
-                /*A fazer */"6 - Gerar relatorios\n" +
+                            "5 - Carregar rotas no Grafo e interagir\n" +
+                            "6 - Gerar relatorios\n" +
                             "7 - Sair"));
             switch (op) {
                 case 1:
@@ -46,19 +48,34 @@ public class Main {
                     }
                     break;
                 case 4:
-                    ArvoresTries.iniciarInteracaoComTrie(arquivoMateriais);
+                    if (arquivoMateriais != null) {
+                        ArvoresTries.iniciarInteracaoComTrie(arquivoMateriais);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Arquivo Materiais.txt não selecionado!");
+                    }
                     break;
-
                 case 5:
-                ArvoresTries.iniciarInteracaoComTrie(arquivoMateriais);
-                break;
+                    if (arquivoRotas != null) {
+                        carregarRotasNoGrafo(grafo, arquivoRotas);
+                        GrafosMenu.iniciarInteracaoComGrafo(arquivoRotas);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Arquivo Rotas.txt não selecionado!");
+                    }
+                    break;
+                case 6:
+                    if (arquivoMateriais != null && arquivoRotas != null) {
+                        RelatoriosMenu.iniciarMenuRelatorios(arquivoMateriais, grafo);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Certifique-se de selecionar os arquivos Materiais.txt e Rotas.txt!");
+                    }
+                    break;
                 case 7:
                     JOptionPane.showMessageDialog(null, "Saindo do sistema...");
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Opção inválida!");
             }
-        } while (op != 5);
+        } while (op != 7);
     }
 
     private static File selecionarArquivo(String titulo) {
@@ -72,6 +89,29 @@ public class Main {
         } else {
             JOptionPane.showMessageDialog(null, "Nenhum arquivo foi selecionado.");
             return null;
+        }
+    }
+
+    private static void carregarRotasNoGrafo(Grafo grafo, File arquivoRotas) {
+        if (arquivoRotas == null) {
+            JOptionPane.showMessageDialog(null, "Arquivo Rotas.txt não selecionado!");
+            return;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivoRotas))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] partes = linha.split(",");
+                if (partes.length == 3) {
+                    String origem = partes[0].trim();
+                    String destino = partes[1].trim();
+                    int peso = Integer.parseInt(partes[2].trim());
+                    grafo.adicionarRota(origem, destino, peso);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Rotas carregadas no grafo com sucesso!");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar rotas: " + e.getMessage());
         }
     }
 }
