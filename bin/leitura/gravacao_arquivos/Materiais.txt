@@ -5,6 +5,6 @@ Metal, Descartavel, Ponto D
 Madeira, Reciclavel, Ponto E
 Aluminio, Reciclavel, Ponto F
 Tetra Pak, Reciclavel, Ponto G
-Papelao, Reciclavel, Ponto H
+Papelao, Reciclavel, Ponto A
 Plastico, Reciclavel, Ponto I
 Vidro, Descartavel, Ponto J

@@ -1,0 +1,30 @@
+Relatório de Materiais por Ponto de Coleta:
+
+Ponto de Coleta: Ponto A
+  - Plastico
+  - Papelao
+
+Ponto de Coleta: Ponto B
+  - Papel
+
+Ponto de Coleta: Ponto C
+  - Vidro
+
+Ponto de Coleta: Ponto D
+  - Metal
+
+Ponto de Coleta: Ponto E
+  - Madeira
+
+Ponto de Coleta: Ponto F
+  - Aluminio
+
+Ponto de Coleta: Ponto G
+  - Tetra Pak
+
+Ponto de Coleta: Ponto I
+  - Plastico
+
+Ponto de Coleta: Ponto J
+  - Vidro
+

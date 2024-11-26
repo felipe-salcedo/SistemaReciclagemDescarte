@@ -9,20 +9,25 @@ public class GrafosMenu {
         Grafo grafo = new Grafo();
         carregarRotasNoGrafo(grafo, arquivoRotas);
 
-        int escolhaGrafo;
+        int escolhaGrafo = 0;
         do {
-            escolhaGrafo = Integer.parseInt(JOptionPane.showInputDialog(
-                "Modelagem e Manipulação de Grafos\n" +
-                "1 - Exibir estrutura do grafo\n" +
-                "2 - Adicionar rota\n" +
-                "3 - Remover rota\n" +
-                "4 - Encontrar menor caminho (Dijkstra)\n" +
-                "5 - Voltar\n" +
-                "Escolha uma opção:"));
+
+            try {
+                escolhaGrafo = Integer.parseInt(JOptionPane.showInputDialog(
+                        "Modelagem e Manipulação de Grafos\n" +
+                                "1 - Exibir estrutura do grafo\n" +
+                                "2 - Adicionar rota\n" +
+                                "3 - Remover rota\n" +
+                                "4 - Encontrar menor caminho (Dijkstra)\n" +
+                                "5 - Voltar\n" +
+                                "Escolha uma opção:"));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null,
+                        "Erro: Entrada inválida. Por favor, digite apenas números inteiros.");
+            }
 
             switch (escolhaGrafo) {
                 case 1:
-                    System.out.println("Estrutura do Grafo:");
                     grafo.exibirGrafo();
                     break;
 
@@ -80,4 +85,3 @@ public class GrafosMenu {
         }
     }
 }
-

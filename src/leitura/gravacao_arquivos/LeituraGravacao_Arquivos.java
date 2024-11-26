@@ -30,12 +30,18 @@ public class LeituraGravacao_Arquivos {
         DataValidator dataValidator = new DataValidator();
 
         do {
-            op = Integer.parseInt(JOptionPane.showInputDialog(
+            try {
+                op = Integer.parseInt(JOptionPane.showInputDialog(
                     "Sistema de Cooperativa de Reciclagem\n" +
                             "1 - Selecionar arquivo Materiais.txt\n" +
                             "2 - Selecionar arquivo Rotas.txt\n" +
                             "3 - Validar e processar arquivos\n" +
                             "4 - Sair"));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null,
+                        "Erro: Entrada inválida. Por favor, digite apenas números inteiros.");
+            }
+           
             switch (op) {
                 case 1:
                     arquivoMateriais = selecionarArquivo("Selecione o arquivo Materiais.txt");

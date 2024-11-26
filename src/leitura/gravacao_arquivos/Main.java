@@ -15,15 +15,21 @@ public class Main {
         Grafo grafo = new Grafo();
 
         do {
-            op = Integer.parseInt(JOptionPane.showInputDialog(
-                    "Sistema de Cooperativa de Reciclagem\n" +
-                            "1 - Selecionar arquivo Materiais.txt\n" +
-                            "2 - Selecionar arquivo Rotas.txt\n" +
-                            "3 - Validar e processar arquivos\n" +
-                            "4 - Carregar materiais na Trie e interagir\n" +
-                            "5 - Carregar rotas no Grafo e interagir\n" +
-                            "6 - Gerar relatorios\n" +
-                            "7 - Sair"));
+            try {
+                op = Integer.parseInt(JOptionPane.showInputDialog(
+                        "Sistema de Cooperativa de Reciclagem\n" +
+                                "1 - Selecionar arquivo Materiais.txt\n" +
+                                "2 - Selecionar arquivo Rotas.txt\n" +
+                                "3 - Validar e processar arquivos\n" +
+                                "4 - Carregar materiais na Trie e interagir\n" +
+                                "5 - Carregar rotas no Grafo e interagir\n" +
+                                "6 - Gerar relatorios\n" +
+                                "7 - Sair"));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null,
+                        "Erro: Entrada inválida. Por favor, digite apenas números inteiros.");
+            }
+
             switch (op) {
                 case 1:
                     arquivoMateriais = selecionarArquivo("Selecione o arquivo Materiais.txt");
@@ -66,7 +72,8 @@ public class Main {
                     if (arquivoMateriais != null && arquivoRotas != null) {
                         RelatoriosMenu.iniciarMenuRelatorios(arquivoMateriais, grafo);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Certifique-se de selecionar os arquivos Materiais.txt e Rotas.txt!");
+                        JOptionPane.showMessageDialog(null,
+                                "Certifique-se de selecionar os arquivos Materiais.txt e Rotas.txt!");
                     }
                     break;
                 case 7:

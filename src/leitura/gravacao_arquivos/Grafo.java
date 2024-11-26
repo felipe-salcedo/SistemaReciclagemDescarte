@@ -2,6 +2,8 @@ package leitura.gravacao_arquivos;
 
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 public class Grafo {
     private Map<String, List<Aresta>> grafo = new HashMap<>();
 
@@ -20,25 +22,29 @@ public class Grafo {
         grafo.putIfAbsent(origem, new ArrayList<>());
         grafo.putIfAbsent(destino, new ArrayList<>());
         grafo.get(origem).add(new Aresta(destino, peso));
-        grafo.get(destino).add(new Aresta(origem, peso)); // Se for grafo não-direcionado
+        grafo.get(destino).add(new Aresta(origem, peso));
     }
 
     // Remover uma rota (aresta)
     public void removerRota(String origem, String destino) {
         grafo.getOrDefault(origem, new ArrayList<>())
-            .removeIf(aresta -> aresta.destino.equals(destino));
+                .removeIf(aresta -> aresta.destino.equals(destino));
         grafo.getOrDefault(destino, new ArrayList<>())
-            .removeIf(aresta -> aresta.destino.equals(origem));
+                .removeIf(aresta -> aresta.destino.equals(origem));
     }
 
     // Exibir estrutura do grafo
     public void exibirGrafo() {
+        StringBuilder estrutura = new StringBuilder("Estrutura do Grafo:\n");
         for (String ponto : grafo.keySet()) {
-            System.out.println("Ponto: " + ponto);
+            estrutura.append("Ponto: ").append(ponto).append("\n");
             for (Aresta aresta : grafo.get(ponto)) {
-                System.out.println("  -> " + aresta.destino + " (Distância: " + aresta.peso + ")");
+                estrutura.append("  -> ").append(aresta.destino)
+                        .append(" (Distância: ").append(aresta.peso).append(")\n");
             }
         }
+        JOptionPane.showMessageDialog(null, estrutura.toString(), "Estrutura do Grafo",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     // Algoritmo de Dijkstra para encontrar o menor caminho
