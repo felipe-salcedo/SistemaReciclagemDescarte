@@ -73,19 +73,22 @@ public class RelatoriosMenu {
     private static void gerarRelatorioRotasMaisCurtas(Grafo grafo, String caminhoRelatorio) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoRelatorio))) {
             bw.write("Relatório de Rotas Mais Curtas:\n\n");
-
+    
             // Para cada ponto no grafo
             for (String pontoOrigem : grafo.getPontos()) {
                 bw.write("Ponto de Origem: " + pontoOrigem + "\n");
                 int menorDistancia = Integer.MAX_VALUE;
                 String pontoMaisProximo = null;
-
+    
                 // Calcular menor caminho para todos os outros pontos
                 for (String pontoDestino : grafo.getPontos()) {
                     if (!pontoOrigem.equals(pontoDestino)) {
-                        List<String> caminho = grafo.dijkstra(pontoOrigem, pontoDestino);
-                        if (caminho != null) {
-                            int distancia = calcularDistanciaDoCaminho(grafo, caminho);
+                        // A chamada ao método agora retorna um Map<String, Object>
+                        Map<String, Object> resultado = grafo.dijkstra(pontoOrigem, pontoDestino);
+                        if (resultado != null) {
+                            // Obter o caminho da chave "caminho"
+                            List<String> caminho = (List<String>) resultado.get("caminho");
+                            int distancia = (int) resultado.get("distanciaTotal"); // A distância total
                             if (distancia < menorDistancia) {
                                 menorDistancia = distancia;
                                 pontoMaisProximo = pontoDestino;
@@ -93,37 +96,28 @@ public class RelatoriosMenu {
                         }
                     }
                 }
-
+    
                 // Escrever menor rota
                 if (pontoMaisProximo != null) {
-                    List<String> menorCaminho = grafo.dijkstra(pontoOrigem, pontoMaisProximo);
+                    Map<String, Object> resultado = grafo.dijkstra(pontoOrigem, pontoMaisProximo);
+                    List<String> menorCaminho = (List<String>) resultado.get("caminho"); // Extraímos o caminho
+                    int distanciaFinal = (int) resultado.get("distanciaTotal"); // Distância final
+                    String nomeRota = (String) resultado.get("nomeRota"); // Nome da rota
+    
                     bw.write("  - Ponto mais próximo: " + pontoMaisProximo + "\n");
+                    bw.write("  - Nome da rota: " + nomeRota + "\n");  // Exibindo o nome da rota
                     bw.write("  - Menor caminho: " + String.join(" -> ", menorCaminho) + "\n");
-                    bw.write("  - Distância: " + menorDistancia + "\n\n");
+                    bw.write("  - Distância: " + distanciaFinal + "\n\n");
                 } else {
                     bw.write("  - Nenhuma rota disponível.\n\n");
                 }
             }
-
+    
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + e.getMessage());
         }
     }
+    
 
-    private static int calcularDistanciaDoCaminho(Grafo grafo, List<String> caminho) {
-        int distanciaTotal = 0;
-        for (int i = 0; i < caminho.size() - 1; i++) {
-            String origem = caminho.get(i);
-            String destino = caminho.get(i + 1);
-
-            for (Grafo.Aresta aresta : grafo.getArestas(origem)) {
-                if (aresta.destino.equals(destino)) {
-                    distanciaTotal += aresta.peso;
-                    break;
-                }
-            }
-        }
-        return distanciaTotal;
-    }
 }
 

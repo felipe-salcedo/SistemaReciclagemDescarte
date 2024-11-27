@@ -62,8 +62,8 @@ public class Main {
                     break;
                 case 5:
                     if (arquivoRotas != null) {
-                        carregarRotasNoGrafo(grafo, arquivoRotas);
-                        GrafosMenu.iniciarInteracaoComGrafo(arquivoRotas);
+                        dataValidator.carregarRotasNoGrafo(grafo, arquivoRotas);
+                        GrafosMenu.iniciarInteracaoComGrafo(arquivoRotas, grafo);
                     } else {
                         JOptionPane.showMessageDialog(null, "Arquivo Rotas.txt não selecionado!");
                     }
@@ -99,26 +99,5 @@ public class Main {
         }
     }
 
-    private static void carregarRotasNoGrafo(Grafo grafo, File arquivoRotas) {
-        if (arquivoRotas == null) {
-            JOptionPane.showMessageDialog(null, "Arquivo Rotas.txt não selecionado!");
-            return;
-        }
-
-        try (BufferedReader br = new BufferedReader(new FileReader(arquivoRotas))) {
-            String linha;
-            while ((linha = br.readLine()) != null) {
-                String[] partes = linha.split(",");
-                if (partes.length == 3) {
-                    String origem = partes[0].trim();
-                    String destino = partes[1].trim();
-                    int peso = Integer.parseInt(partes[2].trim());
-                    grafo.adicionarRota(origem, destino, peso);
-                }
-            }
-            JOptionPane.showMessageDialog(null, "Rotas carregadas no grafo com sucesso!");
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar rotas: " + e.getMessage());
-        }
-    }
+    
 }
