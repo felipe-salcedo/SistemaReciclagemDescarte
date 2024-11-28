@@ -1,10 +1,10 @@
-Rota 1, Ponto A, Ponto B, 3
-Rota 2, Ponto B, Ponto C, 2
-Rota 3, Ponto C, Ponto D, 4
-Rota 4, Ponto D, Ponto E, 6
-Rota 5, Ponto E, Ponto F, 5
-Rota 6, Ponto F, Ponto G, 3
-Rota 7, Ponto A, Ponto H, 7
-Rota 8, Ponto H, Ponto I, 2
-Rota 9, Ponto I, Ponto J, 4
-Rota 10, Ponto J, Ponto A, 8
+Ponto A, Ponto B, 3
+Ponto B, Ponto C, 2
+Ponto C, Ponto D, 4
+Ponto D, Ponto E, 6
+Ponto E, Ponto F, 5
+Ponto F, Ponto G, 3
+Ponto G, Ponto B, 7
+Ponto C, Ponto E, 2
+Ponto A, Ponto F, 4
+Ponto D, Ponto A, 8

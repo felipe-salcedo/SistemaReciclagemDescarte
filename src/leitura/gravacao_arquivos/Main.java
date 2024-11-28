@@ -10,7 +10,7 @@ public class Main {
         File arquivoMateriais = null;
         File arquivoRotas = null;
         DataValidator dataValidator = new DataValidator();
-
+        System.setProperty("org.graphstream.ui", "swing");
         // Inicializar o grafo sem carregar rotas inicialmente
         Grafo grafo = new Grafo();
 

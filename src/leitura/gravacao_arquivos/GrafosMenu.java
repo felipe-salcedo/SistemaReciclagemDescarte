@@ -6,9 +6,6 @@ import java.util.*;
 
 public class GrafosMenu {
     public static void iniciarInteracaoComGrafo(File arquivoRotas, Grafo grafo) {
-        // Grafo grafo = new Grafo();
-        // carregarRotasNoGrafo(grafo, arquivoRotas);
-
         int escolhaGrafo = 0;
         do {
 
@@ -28,23 +25,35 @@ public class GrafosMenu {
 
             switch (escolhaGrafo) {
                 case 1:
-                    grafo.exibirGrafo();
+                    int escolhaVisualizacao = JOptionPane.showOptionDialog(
+                            null,
+                            "Escolha como deseja visualizar o grafo:",
+                            "Visualização do Grafo",
+                            JOptionPane.DEFAULT_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE,
+                            null,
+                            new String[] { "Por texto", "Visualização Gráfica" },
+                            "Por texto");
+
+                    if (escolhaVisualizacao == 0) {
+                        grafo.exibirGrafo();
+                    } else if (escolhaVisualizacao == 1) {
+                        grafo.exibirGrafoGrafico();
+                    }
                     break;
 
                 case 2:
-                    String nomeRota = JOptionPane.showInputDialog("Digite o nome da rota:");
                     String origem = JOptionPane.showInputDialog("Digite o ponto de origem:");
                     String destino = JOptionPane.showInputDialog("Digite o ponto de destino:");
                     int peso = Integer.parseInt(JOptionPane.showInputDialog("Digite a distância entre os pontos:"));
-                    grafo.adicionarRota(nomeRota, origem, destino, peso);
+                    grafo.adicionarRota(origem, destino, peso);
                     JOptionPane.showMessageDialog(null, "Rota adicionada com sucesso!");
                     break;
 
                 case 3:
-                    nomeRota = JOptionPane.showInputDialog("Digite o nome da rota:");
-                    origem = JOptionPane.showInputDialog("Digite o ponto de origem:");
-                    destino = JOptionPane.showInputDialog("Digite o ponto de destino:");
-                    grafo.removerRota(nomeRota, origem, destino);
+                    String origemRemover = JOptionPane.showInputDialog("Digite o ponto de origem:");
+                    String destinoRemover = JOptionPane.showInputDialog("Digite o ponto de destino:");
+                    grafo.removerRota(origemRemover, destinoRemover);
                     JOptionPane.showMessageDialog(null, "Rota removida com sucesso!");
                     break;
 
@@ -56,12 +65,13 @@ public class GrafosMenu {
                         JOptionPane.showMessageDialog(null, "Não há caminho disponível entre os pontos.");
                     } else {
                         int distanciaTotal = (int) resultado.get("distanciaTotal");
-                        nomeRota = (String) resultado.get("nomeRota");
+                        List<String> caminho = (List<String>) resultado.get("caminho");
 
-                        // Exibir o caminho, distância e nome da rota
+                        // Exibir o caminho e a distância total
                         JOptionPane.showMessageDialog(null, "A menor rota entre "
-                                + origem + " e " + destino + " e a:" +
-                                nomeRota + "\nDistância total: " + distanciaTotal);
+                                + origem + " e " + destino + " é:\n" +
+                                String.join(" -> ", caminho) +
+                                "\nDistância total: " + distanciaTotal + " unidades.");
                     }
                     break;
 
@@ -74,5 +84,4 @@ public class GrafosMenu {
             }
         } while (escolhaGrafo != 5);
     }
-
 }

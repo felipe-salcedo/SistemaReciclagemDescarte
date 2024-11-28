@@ -2,6 +2,8 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
+        "libs/gs-ui-swing-2.0.jar",
+        "libs/gs-core-2.0.jar",
         "lib/**/*.jar"
     ]
 }

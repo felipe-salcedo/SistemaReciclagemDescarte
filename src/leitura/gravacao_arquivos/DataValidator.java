@@ -41,12 +41,11 @@ public class DataValidator {
             String linha;
             while ((linha = br.readLine()) != null) {
                 String[] partes = linha.split(",");
-                if (partes.length == 4) {
-                    String nomeRota = partes[0].trim();
-                    String origem = partes[1].trim();
-                    String destino = partes[2].trim();
-                    int peso = Integer.parseInt(partes[3].trim());
-                    grafo.adicionarRota(nomeRota, origem, destino, peso);
+                if (partes.length == 3) {
+                    String origem = partes[0].trim();
+                    String destino = partes[1].trim();
+                    int peso = Integer.parseInt(partes[2].trim());
+                    grafo.adicionarRota(origem, destino, peso);
                 }
             }
             JOptionPane.showMessageDialog(null, "Rotas carregadas no grafo com sucesso!");
@@ -80,7 +79,7 @@ public class DataValidator {
     public void validarRotas(List<String> rotas) {
         Set<String> duplicados = new HashSet<>();
         for (String linha : rotas) {
-            if (!linha.matches("^Rota\\s\\d+,\\s*Ponto\\s[A-Z],\\s*Ponto\\s[A-Z],\\s*\\d+$")) {
+            if (!linha.matches("^Ponto\\s[A-Z],\\s*Ponto\\s[A-Z],\\s*\\d+$")) {
                 throw new IllegalArgumentException("Formato inválido em Rotas.txt: " + linha);
             }
             if (!duplicados.add(linha)) {
